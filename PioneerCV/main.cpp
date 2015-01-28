@@ -25,20 +25,6 @@ Adept MobileRobots, 10 Columbia Drive, Amherst, NH 03031; +1-603-881-7960
 */
 #include "Aria.h"
 
-
-/** @example demo.cpp General purpose testing and demo program, using ArMode
- *    classes to provide keyboard control of various robot functions.
- *
- *  demo uses ArMode subclasses from ARIA. These modes
- *  provide keyboard control of various aspects and accessories of 
- *  the robot, and can be re-used in your programs if you wish.  
- *  The ArMode classes are defined in %ArModes.cpp.
- *
- *  "demo" is a useful program for testing out the operation of the robot
- *  for diagnostic or demonstration purposes.  Other example programs
- *  focus on individual areas.
- */
-
 bool handleDebugMessage(ArRobotPacket *pkt)
 {
   if(pkt->getID() != ArCommands::MARCDEBUG) return false;
@@ -53,10 +39,7 @@ int main(int argc, char** argv)
 {
   // Initialize some global data
   Aria::init();
-
-  // If you want ArLog to print "Verbose" level messages uncomment this:
-  //ArLog::init(ArLog::StdOut, ArLog::Verbose);
-
+  
   // This object parses program options from the command line
   ArArgumentParser parser(&argc, argv);
 
@@ -64,6 +47,7 @@ int main(int argc, char** argv)
   // (Linux) or the ARIAARGS environment variable.
   parser.loadDefaultArguments();
   parser.addDefaultArgument("-rh 192.168.1.150");
+
   // Central object that is an interface to the robot and its integrated
   // devices, and which manages control of the robot by the rest of the program.
   ArRobot robot;
@@ -127,7 +111,6 @@ int main(int argc, char** argv)
   
   ArModeUnguardedTeleop unguardedTeleop(&robot, "unguarded teleop", 'u', 'U');
   ArModeTeleop teleop(&robot, "teleop", 't', 'T');
-
 
   // activate the default mode
   unguardedTeleop.activate();
